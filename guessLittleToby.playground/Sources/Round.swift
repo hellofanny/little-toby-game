@@ -1,13 +1,17 @@
 import Foundation
 
-public class DataOptions{
+class Round{
     
     var answer = String()
-    
-    
-    var labelsArray: [String] = ["angry", "celebrating", "confused","dizzy","guilty","happy","hiding","sad","speechless","surprised","tired"]
-    
+    var labelsArray = [String]()
     var optionsArray = [String]()
+    
+    
+    init() {
+        self.labelsArray = ["angry", "celebrating", "confused","dizzy","guilty","happy","hiding","sad","speechless","surprised","tired"]
+    }
+    
+    
     
     func getRandomLabel()-> Int{
         let random = Int(arc4random_uniform(11))
@@ -50,8 +54,9 @@ public class DataOptions{
         return optionsArray
     }
     
-    func getOptions(){
-        shuffle(optionsArray)
+    func getOptions() -> Array<String>{
+        generateOptions()
+        return shuffle(optionsArray)
     }
 
     
