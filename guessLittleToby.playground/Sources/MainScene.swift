@@ -2,11 +2,11 @@
 import Foundation
 import SpriteKit
 
-public class Second : SKScene{
+public class MainScene : SKScene{
     
-    var nomePessoa = String()
+    var personName = String()
     
-    let image = SKSpriteNode (imageNamed: "tired1")
+    let image = SKSpriteNode (imageNamed: "tired")
     
     let image2 = SKSpriteNode (imageNamed: "happy")
     
@@ -32,15 +32,15 @@ public class Second : SKScene{
         let frame = CGRect(x: 0, y: 0, width: 500, height: 600)
         let midPoint = CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0)
         
-        
         self.backgroundColor = .white
+        
         label.fontColor = SKColor.black
         label.position = CGPoint(x: frame.size.width / 2.0, y: 430)
         label.fontSize = 20
-        
-        setUpTargets()
         self.addChild(label)
         
+        
+        setUpTargets()
         image.position = CGPoint(x:self.frame.midX, y:self.frame.midY*0.75);
         self.addChild(image)
         
@@ -51,14 +51,14 @@ public class Second : SKScene{
         self.addChild(image3)
         
         
-        //setPersonName()
+        setPersonName()
         setDescreptionLabel()
-        print(nomePessoa)
+        print(personName)
         
     }
     
     func setPersonName(){
-        labelName.text = nomePessoa
+        labelName.text = personName
         labelName.fontColor = SKColor.magenta
         labelName.position = CGPoint(x:self.frame.midX, y:self.frame.midY);
         self.addChild(labelName)
@@ -72,10 +72,10 @@ public class Second : SKScene{
         self.addChild(labelDescription)
     }
     
-
+    
     func setUpTargets(){
-       // option1.color = .lightGray
-      //  option1.size = CGSize(width: 130, height: 40)
+        // option1.color = .lightGray
+        //  option1.size = CGSize(width: 130, height: 40)
         option1.position = CGPoint(x:self.frame.midX, y:self.image.position.y+55);
         self.addChild(self.option1)
         
