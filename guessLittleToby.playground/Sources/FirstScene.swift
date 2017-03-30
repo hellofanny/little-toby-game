@@ -6,9 +6,7 @@ public class FirstScene : SKScene{
     
     
     let helloLabel = SKLabelNode(text: "Hello, I'm little Tobby.")
-    
     let littleToby = SKSpriteNode(imageNamed: "littletoby")
-    
     let helloLabel1 = SKLabelNode(text: "What is your name?")
     let textField = UITextField()
     let button = SKSpriteNode(color: SKColor.brown, size: CGSize(width: 100, height: 44))
@@ -36,7 +34,6 @@ public class FirstScene : SKScene{
     
     func setPresentationLabels(){
         
-        
         //Hello,I am little toby
         helloLabel.fontColor = SKColor.black
         helloLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
@@ -48,7 +45,6 @@ public class FirstScene : SKScene{
         helloLabel1.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 30)
         helloLabel1.fontSize = 25
         self.addChild(helloLabel1)
-        
         
     }
     
@@ -62,15 +58,10 @@ public class FirstScene : SKScene{
         self.view?.addSubview(textField)
     }
     
-    func createButton()
-    {
-        
-        // Put it in the center of the scene
-        
+    
+    func createButton(){
         self.button.position = CGPoint(x:self.frame.midX, y:self.frame.midY-100);
-        
         self.addChild(self.button)
-        
     }
     
     
@@ -80,21 +71,14 @@ public class FirstScene : SKScene{
         // Check if the location of the touch is within the button's bounds
         if button.contains(touchLocation) {
             
-            
             let sceneMoveTo = MainScene(size: self.size)
-            
             sceneMoveTo.scaleMode = self.scaleMode
-            
             sceneMoveTo.personName = (textField.text?.description)!
             self.textField.removeFromSuperview()
-            
+    
             let transition = SKTransition.moveIn(with: .right, duration: 0.8)
             self.scene?.view?.presentScene(sceneMoveTo ,transition: transition)
-            
-            
-            //print("tapped!")
-            
-            
+
         }
         
     }

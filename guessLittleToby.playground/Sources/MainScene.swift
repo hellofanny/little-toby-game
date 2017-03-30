@@ -15,9 +15,6 @@ public class MainScene : SKScene{
     
     let label = SKLabelNode(text: "What I look like when I am:")
     
-    //text = Drop the word in the right sticker
-    
-    
     let labelName = SKLabelNode()
     let labelDescription = SKLabelNode()
     
@@ -26,7 +23,9 @@ public class MainScene : SKScene{
     let option1 = SKSpriteNode (imageNamed: "blank1")
     let option2 = SKSpriteNode()
     
+    let round = DataOptions()
     
+
     override public func didMove(to view: SKView) {
         
         let frame = CGRect(x: 0, y: 0, width: 500, height: 600)
@@ -88,7 +87,6 @@ public class MainScene : SKScene{
             let touchLocation = touch.location(in: self)
             labelDescription.position.x = touchLocation.x
             labelDescription.position.y = touchLocation.y
-            
             
         }
         
