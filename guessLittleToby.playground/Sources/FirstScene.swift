@@ -9,9 +9,9 @@ public class FirstScene : SKScene{
     let littleToby = SKSpriteNode(imageNamed: "littletoby")
     let helloLabel1 = SKLabelNode(text: "What is your name?")
     let textField = UITextField()
-    let button = SKSpriteNode(color: SKColor.init(red: 221/255, green: 76/255, blue: 100/255, alpha: 1.0), size: CGSize(width: 100, height: 44))
-    
-    
+   /* let button = SKSpriteNode(color: SKColor.init(red: 221/255, green: 76/255, blue: 100/255, alpha: 1.0), size: CGSize(width: 100, height: 44))
+   */
+    let button = SKSpriteNode(imageNamed: "btn_hello_normal1")
     
     override public func didMove(to view: SKView) {
         
@@ -70,6 +70,8 @@ public class FirstScene : SKScene{
         let touchLocation = touch!.location(in: self)
         // Check if the location of the touch is within the button's bounds
         if button.contains(touchLocation) {
+            
+            button.texture = SKTexture(imageNamed: "btn_hello_pressed1")
             
             let sceneMoveTo = MainScene(size: self.size)
             sceneMoveTo.scaleMode = self.scaleMode

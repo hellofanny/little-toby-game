@@ -8,13 +8,13 @@ class Round{
     
     
     init() {
-        self.labelsArray = ["angry", "celebrating", "confused","dizzy","guilty","happy","hiding","sad","speechless","surprised","tired"]
+        self.labelsArray = ["angry", "celebrating", "confused","dizzy","guilty","happy","hiding","sad","speechless","surprised","sleepy","tired","loved"]
     }
     
     
     
     func getRandomLabel()-> Int{
-        let random = Int(arc4random_uniform(11))
+        let random = Int(arc4random_uniform(13))
         return random
     }
     

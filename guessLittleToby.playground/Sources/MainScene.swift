@@ -20,6 +20,11 @@ public class MainScene : SKScene{
     let option2 = SKSpriteNode (imageNamed: "blank")
      */
     let labelDescription = SKLabelNode()
+    var labelFeedback = SKLabelNode()
+    
+    var feedback = SKSpriteNode()
+    
+    
     let round = Round()
     var roundOptions = Array<String>()
     
@@ -44,6 +49,9 @@ public class MainScene : SKScene{
         //setImages()
        // setUpTargets()
 
+        setFeedback()
+        
+        //setFeedbackLabel()
         print(imagesOptions[0].1.description)
         print(personName)
     }
@@ -69,10 +77,10 @@ public class MainScene : SKScene{
     
     func setDescreptionLabel(){
         labelDescription.text = self.round.answer
-        labelDescription.fontName = "Helvetica"
-        labelDescription.fontSize = 24
+        labelDescription.fontName = ".SFUIText"
+        labelDescription.fontSize = 22
         labelDescription.fontColor = SKColor.black
-        labelDescription.position = CGPoint(x:self.frame.midX, y:265)
+        labelDescription.position = CGPoint(x:self.frame.midX, y:275)
         labelDescription.zPosition = 10
         self.addChild(labelDescription)
     }
@@ -80,9 +88,9 @@ public class MainScene : SKScene{
     
     
     func loadOptions(){
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[0]), SKSpriteNode(imageNamed: "blank")))
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[1]), SKSpriteNode(imageNamed: "blank")))
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[2]), SKSpriteNode(imageNamed: "blank")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[0]), SKSpriteNode(imageNamed: "blank1")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[1]), SKSpriteNode(imageNamed: "blank1")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[2]), SKSpriteNode(imageNamed: "blank1")))
         
         //adding the images
         imagesOptions[0].0.position = CGPoint(x:self.frame.midX-145, y:self.frame.midY*0.95);
@@ -94,11 +102,11 @@ public class MainScene : SKScene{
         
         //adding the targets
         
-        imagesOptions[0].1.position = CGPoint(x:self.frame.midX-145, y:imagesOptions[0].0.position.y-100);
+        imagesOptions[0].1.position = CGPoint(x:self.frame.midX-145, y:imagesOptions[0].0.position.y-90);
         self.addChild(imagesOptions[0].1)
-        imagesOptions[1].1.position = CGPoint(x:self.frame.midX, y:imagesOptions[1].0.position.y-100);
+        imagesOptions[1].1.position = CGPoint(x:self.frame.midX, y:imagesOptions[1].0.position.y-90);
         self.addChild(imagesOptions[1].1)
-        imagesOptions[2].1.position = CGPoint(x:self.frame.midX+145, y:imagesOptions[2].0.position.y-100);
+        imagesOptions[2].1.position = CGPoint(x:self.frame.midX+145, y:imagesOptions[2].0.position.y-90);
         self.addChild(imagesOptions[2].1)
 
         
@@ -108,6 +116,26 @@ public class MainScene : SKScene{
     func checkAsnwer(){
         let i = roundOptions.index(of: round.answer)
     }
+    
+    
+    func setFeedback(){
+        feedback = SKSpriteNode(imageNamed: "instruction")
+        feedback.position = CGPoint(x: self.frame.midX, y: self.frame.minY+45)
+        self.addChild(feedback)
+        
+    }
+    
+    
+    func setFeedbackLabel(){
+        labelFeedback.fontColor = SKColor.init(red: 96/255, green: 205/255, blue: 233/255, alpha: 1.0)
+        //labelFeedback.fontColor = SKColor.black
+        
+        labelFeedback.fontName = ".SFUIText"
+        labelFeedback.position = CGPoint(x: self.frame.midX, y: self.frame.minY+40)
+        labelFeedback.fontSize = 20
+        self.addChild(labelFeedback)
+    }
+    
     /*func setImages(){
         
         image0.texture = SKTexture(imageNamed: roundOptions[0])
@@ -143,6 +171,20 @@ public class MainScene : SKScene{
     }
   */
     
+    
+    /*  TA SUPER ERRADO ISSO!!!! #RESOLVER URGENTE
+     
+     func newRound(){
+        imagesOptions.removeAll()
+        roundOptions = round.getOptions()
+        self.removeAllChildren()
+        labelDescription.removeFromParent()
+        setDescreptionLabel()
+        loadOptions()
+        
+    }
+ */
+    
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in touches{
@@ -155,26 +197,34 @@ public class MainScene : SKScene{
         
     }
     
+    
+    
+    
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if (imagesOptions[roundOptions.index(of: round.answer)!].1.frame.contains(labelDescription.position)){
             print("entrou aqui")
             
-            labelDescription.fontColor = SKColor.magenta
-        }
+            labelDescription.fontColor = SKColor.init(red: 96/255, green: 205/255, blue: 233/255, alpha: 1.0)
+            labelDescription.fontName = ".SFUIText-Medium"
+            
+            labelFeedback.text = "WOW! You did great! :)"
+            
+            feedback.texture = SKTexture(imageNamed: "rightAnswer")
         
-        //if  touches.first != nil{
             
-                
-          //  }
-          //  if (labelPersonName.text == "happy"){
-            //    labelPersonName.removeFromParent()
-            //}
+        }else{
+            labelDescription.fontColor = SKColor.black
+            labelDescription.fontName = ".SFUIText"
             
-         //   if(image2.description.contains(labelDescription.text!)){
-             //   print("try again")
+            labelFeedback.text = "oops...let's try again!"
             
-         //   }
+             feedback.texture = SKTexture(imageNamed: "wrongAnswer")
+            
+            print("incorrect")
+            
+            
+        }
         
     }
     
