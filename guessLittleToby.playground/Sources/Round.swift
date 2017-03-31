@@ -21,7 +21,7 @@ class Round{
     
     func generateOptions(){
         
-        var index = getRandomLabel()
+        let index = getRandomLabel()
         answer = labelsArray[index]
         optionsArray.append(answer)
         
