@@ -54,11 +54,12 @@ class Round{
         return optionsArray
     }
     
+    
     func getOptions() -> Array<String>{
         generateOptions()
         return shuffle(optionsArray)
     }
-
+    
     
     
 }

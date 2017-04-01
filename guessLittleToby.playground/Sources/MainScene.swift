@@ -5,15 +5,13 @@ import SpriteKit
 public class MainScene : SKScene{
     
     var personName = String()
-    let labelPersonName = SKLabelNode()
     
-    let labelSentence = SKLabelNode(text: "What I look like when I am:")
+    let labelStatement = SKLabelNode(text: "What I look like when I am:")
     
     var imagesOptions = [(SKSpriteNode,SKSpriteNode)]()
     
     let labelDescription = SKLabelNode()
-    var labelFeedback = SKLabelNode()
-    
+  
     var feedback = SKSpriteNode()
     var buttonNext = SKSpriteNode()
     
@@ -23,7 +21,7 @@ public class MainScene : SKScene{
     
     var roundCount:Int = 0
     
-    var correct:Bool = false
+    var correct = Bool()
     
     
     override public func didMove(to view: SKView) {
@@ -33,17 +31,13 @@ public class MainScene : SKScene{
         
         
         roundOptions = round.getOptions()
-        print(round.answer)
-        print(roundOptions)
+      //print(round.answer)
+      //print(roundOptions)
         loadOptions()
-        //var teste = round.answer
-        //self.image.texture = SKTexture(imageNamed: teste)
         
-        setPersonName()
-        setSentence()
+        setStatement()
         
         setDescreptionLabel()
-        
         
         setFeedback()
         
@@ -51,21 +45,13 @@ public class MainScene : SKScene{
         print(personName)
     }
     
+
     
-    func setPersonName(){
-        labelPersonName.text = self.personName
-        labelPersonName.fontColor = SKColor.magenta
-        labelPersonName.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
-        labelPersonName.zPosition = 10
-        self.addChild(labelPersonName)
-        
-    }
-    
-    func setSentence(){
-        labelSentence.fontColor = SKColor.black
-        labelSentence.position = CGPoint(x: self.frame.midX, y: self.frame.midY+100)
-        labelSentence.fontSize = 25
-        self.addChild(labelSentence)
+    func setStatement(){
+        labelStatement.fontColor = SKColor.black
+        labelStatement.position = CGPoint(x: self.frame.midX, y: self.frame.midY+100)
+        labelStatement.fontSize = 25
+        self.addChild(labelStatement)
     }
     
     
@@ -83,9 +69,9 @@ public class MainScene : SKScene{
     
     
     func loadOptions(){
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[0]), SKSpriteNode(imageNamed: "blank1")))
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[1]), SKSpriteNode(imageNamed: "blank1")))
-        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[2]), SKSpriteNode(imageNamed: "blank1")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[0]), SKSpriteNode(imageNamed: "blank")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[1]), SKSpriteNode(imageNamed: "blank")))
+        imagesOptions.append((SKSpriteNode(imageNamed:roundOptions[2]), SKSpriteNode(imageNamed: "blank")))
         
         //adding the images
         imagesOptions[0].0.position = CGPoint(x:self.frame.midX-145, y:self.frame.midY*0.95);
@@ -142,7 +128,7 @@ public class MainScene : SKScene{
         roundOptions = round.getOptions()
         self.removeAllChildren()
         labelDescription.removeFromParent()
-        setSentence()
+        setStatement()
         setDescreptionLabel()
         feedback.removeFromParent()
         setFeedback()
@@ -156,14 +142,22 @@ public class MainScene : SKScene{
         let touch = touches.first
         let touchLocation = touch!.location(in: self)
         
-        if (buttonNext.contains(touchLocation) && roundCount<5 && correct){
+        if (buttonNext.contains(touchLocation) && self.roundCount<5 && self.correct){
             self.buttonNext.texture = SKTexture(imageNamed: "btn_next_pressed")
             print(roundCount)
             roundCount+=1
             self.newRound()
             
-        }else if(roundCount==5){
-            print("final")
+        }else if(buttonNext.contains(touchLocation) && roundCount==5){
+            //end of the game
+            
+            let sceneMoveTo = LastScene(size: self.size)
+            sceneMoveTo.scaleMode = self.scaleMode
+            sceneMoveTo.personName = personName
+            
+            let transition = SKTransition.moveIn(with: .right, duration: 0.8)
+            self.scene?.view?.presentScene(sceneMoveTo ,transition: transition)
+            
         }
     }
     
@@ -176,57 +170,20 @@ public class MainScene : SKScene{
             labelDescription.position.x = touchLocation.x
             labelDescription.position.y = touchLocation.y
         }
-        
     }
     
     
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        /* for touch: AnyObject in touches {
-         let location = touch.location(in: self)
-         
-         if buttonNext.contains(location) && roundCount<5 && (!buttonNext.isHidden){
-         buttonNext.texture = SKTexture(imageNamed: "btn_next_pressed")
-         newRound()
-         }else{
-         print("final")
-         }
-         }
-         */
-        
-        //O QUE FUNCIONA
-        /* if (imagesOptions[roundOptions.index(of: round.answer)!].1.frame.contains(labelDescription.position)){
-         
-         labelDescription.fontColor = SKColor.init(red: 96/255, green: 205/255, blue: 233/255, alpha: 1.0)
-         labelDescription.fontName = ".SFUIText-Medium"
-         
-         feedback.texture = SKTexture(imageNamed: "rightAnswer")
-         roundCount+=1
-         
-         correct = true
-         setNextbutton()
-         
-         
-         }else{
-         
-         
-         feedback.texture = SKTexture(imageNamed: "wrongAnswer")
-         labelDescription.fontColor = SKColor.black
-         labelDescription.fontName = ".SFUIText"
-         
-         print("incorrect")
-         
-         }
-         */
-        //only recognizer in the blanket areas
-        for blank in imagesOptions{
-            if blank.1.frame.contains(labelDescription.position){
+        //only recognize in the blanket areas
+        for blank in self.imagesOptions{
+            if blank.1.frame.contains(self.labelDescription.position){
                 if (imagesOptions[roundOptions.index(of: round.answer)!].1.frame.contains(labelDescription.position)){
                     
                     setRightAnswerFeedback()
                     
-                    correct = true
+                    self.correct = true
                     setNextbutton()
                     
                 }
@@ -238,8 +195,6 @@ public class MainScene : SKScene{
                 }
             }
         }
-        
-        
     }
     
 }
