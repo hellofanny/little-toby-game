@@ -5,13 +5,16 @@ import SpriteKit
 public class FirstScene : SKScene{
     
     
-    let helloLabel = SKLabelNode(text: "Hi, I'm little Tobby.")
+    let helloLabel = SKLabelNode(text: "Hi, I'm little Toby.")
     let littleToby = SKSpriteNode(imageNamed: "littletoby")
     let helloLabel1 = SKLabelNode(text: "What is your name?")
     let textField = UITextField()
    /* let button = SKSpriteNode(color: SKColor.init(red: 221/255, green: 76/255, blue: 100/255, alpha: 1.0), size: CGSize(width: 100, height: 44))
    */
     let button = SKSpriteNode(imageNamed: "btn_hello_normal")
+    
+    
+     let miniLogo = SKSpriteNode(imageNamed: "miniLogo")
     
     override public func didMove(to view: SKView) {
         
@@ -29,6 +32,10 @@ public class FirstScene : SKScene{
         
         print(self.helloLabel.frame.width)
         
+        miniLogo.position = CGPoint(x: self.frame.midX, y: self.frame.minY+20)
+        miniLogo.setScale(0.43)
+        self.addChild(miniLogo)
+
         
     }
     
@@ -36,6 +43,7 @@ public class FirstScene : SKScene{
         
         //Hello,I am little toby
         helloLabel.fontColor = SKColor.black
+        helloLabel.fontName = ".SFUIText"
         helloLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         helloLabel.fontSize = 30
         self.addChild(helloLabel)

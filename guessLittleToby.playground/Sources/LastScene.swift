@@ -10,6 +10,7 @@ public class LastScene : SKScene{
     let littleToby = SKSpriteNode(imageNamed: "proudOfYou")
     let button = SKSpriteNode(imageNamed: "btn_playAgain_normal")
     
+    
     var personName = String()
     
     
@@ -26,7 +27,7 @@ public class LastScene : SKScene{
         littleToby.position = CGPoint(x:self.frame.midX, y:self.button.position.y+165);
         littleToby.setScale(0.45)
         self.addChild(littleToby)
-        
+               
         createButton()
         
     }
@@ -35,7 +36,7 @@ public class LastScene : SKScene{
     func setPersonName(){
         
         //testing
-        labelPersonName.text = "Fanny"
+        labelPersonName.text = self.personName
         labelPersonName.fontColor = SKColor.init(red: 96/255, green: 205/255, blue: 233/255, alpha: 1.0)
         labelPersonName.fontName = ".SFUIText"
         labelPersonName.position = CGPoint(x:self.frame.midX, y:self.frame.midY+100)
