@@ -11,7 +11,7 @@ public class FirstScene : SKScene{
     let textField = UITextField()
    /* let button = SKSpriteNode(color: SKColor.init(red: 221/255, green: 76/255, blue: 100/255, alpha: 1.0), size: CGSize(width: 100, height: 44))
    */
-    let button = SKSpriteNode(imageNamed: "btn_hello_normal1")
+    let button = SKSpriteNode(imageNamed: "btn_hello_normal")
     
     override public func didMove(to view: SKView) {
         
@@ -71,7 +71,7 @@ public class FirstScene : SKScene{
         // Check if the location of the touch is within the button's bounds
         if button.contains(touchLocation) {
             
-            button.texture = SKTexture(imageNamed: "btn_hello_pressed1")
+            button.texture = SKTexture(imageNamed: "btn_hello_pressed")
             
             let sceneMoveTo = MainScene(size: self.size)
             sceneMoveTo.scaleMode = self.scaleMode
