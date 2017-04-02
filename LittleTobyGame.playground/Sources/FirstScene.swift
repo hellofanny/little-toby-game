@@ -21,32 +21,29 @@ public class FirstScene : SKScene{
         
         self.backgroundColor = .white
         
-        setPresentationLabels()
+        self.setPresentationLabels()
         
-        littleToby.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 100);
+        self.littleToby.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 100);
         self.addChild(littleToby)
         
-        createTextField()
-        createButton()
-        
-        print(self.helloLabel.frame.width)
-
-        
+        self.createTextField()
+        self.createButton()
     }
+    
     
     func setPresentationLabels(){
         
         //Hello,I am little toby
-        helloLabel.fontColor = SKColor.black
-        helloLabel.fontName = ".SFUIText"
-        helloLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-        helloLabel.fontSize = 30
+        self.helloLabel.fontColor = SKColor.black
+        self.helloLabel.fontName = ".SFUIText"
+        self.helloLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        self.helloLabel.fontSize = 30
         self.addChild(helloLabel)
         
         //what is your name
-        helloLabel1.fontColor = SKColor.black
-        helloLabel1.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 30)
-        helloLabel1.fontSize = 25
+        self.helloLabel1.fontColor = SKColor.black
+        self.helloLabel1.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 30)
+        self.helloLabel1.fontSize = 25
         self.addChild(helloLabel1)
         
     }
@@ -54,10 +51,10 @@ public class FirstScene : SKScene{
     
     func createTextField(){
         //different orientation UI
-        textField.frame = CGRect(x: ((view?.bounds.width)!/2)-100, y: ((view?.bounds.height)!/2)+40, width: self.helloLabel1.frame.width, height: 25)
-        textField.borderStyle = UITextBorderStyle.roundedRect
-        textField.placeholder = "type your name"
-        textField.textColor = UIColor.black
+        self.textField.frame = CGRect(x: ((view?.bounds.width)!/2)-100, y: ((view?.bounds.height)!/2)+40, width: self.helloLabel1.frame.width, height: 25)
+        self.textField.borderStyle = UITextBorderStyle.roundedRect
+        self.textField.placeholder = "type your name"
+        self.textField.textColor = UIColor.black
         self.view?.addSubview(textField)
     }
     
@@ -72,7 +69,7 @@ public class FirstScene : SKScene{
         let touch = touches.first
         let touchLocation = touch!.location(in: self)
         // Check if the location of the touch is within the button's bounds
-        if button.contains(touchLocation) {
+        if self.button.contains(touchLocation) {
             
             button.texture = SKTexture(imageNamed: "btn_hello_pressed")
             

@@ -22,15 +22,15 @@ class Round{
     func generateOptions(){
         
         let index = getRandomLabel()
-        answer = labelsArray[index]
-        optionsArray.append(answer)
+        self.answer = labelsArray[index]
+        self.optionsArray.append(answer)
         
         var random1 = getRandomLabel()
         if(random1 == index){
             random1 = (random1+1)%10
-            optionsArray.append(labelsArray[random1])
+            self.optionsArray.append(labelsArray[random1])
         }else{
-            optionsArray.append(labelsArray[random1])
+            self.optionsArray.append(labelsArray[random1])
         }
         
         var random2 = Int()
@@ -38,25 +38,25 @@ class Round{
         repeat {
             random2 = getRandomLabel()
         } while (random2 == index || random1 == random2)
-        optionsArray.append(labelsArray[random2])
+        self.optionsArray.append(labelsArray[random2])
         
     }
     
     
     func shuffle(_: Array<String>)-> Array<String>{
-        optionsArray = optionsArray.reversed()
+        optionsArray = self.optionsArray.reversed()
         let random = Int(arc4random_uniform(3))
         if random == 2{
-            return optionsArray
+            return self.optionsArray
         }else{
             swap(&optionsArray[random], &optionsArray[2])
         }
-        return optionsArray
+        return self.optionsArray
     }
     
     
     func getOptions() -> Array<String>{
-        generateOptions()
+        self.generateOptions()
         return shuffle(optionsArray)
     }
     
