@@ -2,12 +2,15 @@
 
 This playground was created for WWDC 2017 Scholarship Application.
 
+#### The project
 
- A simple game for teaching emotion words and feeling concepts to kids in a ludic way. Associate the words to the corresponding feeling expressed by Little Toby and match it. 
+A simple game for teaching emotion words and feeling concepts to kids in a ludic way. Associate the words to the corresponding feeling expressed by Little Toby and match it. 
 
+#### Build with
 
-- This mini game was made using the SpriteKit framework, mainly using SKScenes, SKLabelNodes and SKSpriteNodes.
+This mini game was made using the SpriteKit framework, mainly using SKScenes, SKLabelNodes and SKSpriteNodes.
 
+#### Preview
 
 ![LittleTobyGameDemo](https://j.gifs.com/ANNn3z.gif)
 
